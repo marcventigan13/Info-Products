@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Client Name] — Consistency Gets Easy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --red:#C41E1E;
+  --red-dark:#8B1515;
+  --red-light:#FEF2F2;
+  --off-white:#F8F6F1;
+  --warm-white:#FFFFFF;
+  --charcoal:#1E1C18;
+  --ink:#2E2C28;
+  --mid:#706D66;
+  --light:#E8E5DF;
+  --lighter:#F2EFE9;
+}
+
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--off-white);color:var(--ink);line-height:1.7;font-size:16px;}
+
+.display{font-family:'Cormorant Garamond',serif;font-weight:700;line-height:1.15;}
+.display em{font-style:italic;color:var(--red);}
+
+.container{max-width:1060px;margin:0 auto;padding:0 32px;}
+.container-narrow{max-width:740px;margin:0 auto;padding:0 32px;}
+
+/* NAV */
+nav{background:var(--charcoal);padding:20px 0;}
+nav .inner{display:flex;align-items:center;justify-content:center;max-width:1060px;margin:0 auto;padding:0 32px;}
+.logo{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;color:#fff;letter-spacing:-.01em;text-align:center;}
+.logo span{color:var(--red);}
+
+/* HERO */
+.hero{background:var(--charcoal);padding:72px 0 64px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(196,30,30,.12),transparent);pointer-events:none;}
+.hero-tag{display:inline-block;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:14px;font-weight:400;letter-spacing:.04em;padding:7px 22px;border-radius:20px;margin-bottom:28px;font-style:italic;}
+.hero h1{font-size:clamp(34px,5.5vw,58px);color:#fff;max-width:680px;margin:0 auto 18px;}
+.hero-sub{font-size:17px;color:#fff;max-width:520px;margin:0 auto 36px;font-weight:300;line-height:1.7;}
+.hero-img{width:100%;max-width:640px;height:280px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;margin:0 auto 40px;color:rgba(255,255,255,.95);font-size:20px;font-weight:400;}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;padding:16px 44px;border-radius:2px;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:background .2s,transform .15s;letter-spacing:.04em;}
+.btn:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-lg{display:block;width:100%;background:var(--red);color:#fff;text-decoration:none;padding:20px;border-radius:2px;font-size:16px;font-weight:500;cursor:pointer;border:none;text-align:center;transition:background .2s,transform .15s;letter-spacing:.04em;}
+.btn-lg:hover{background:var(--red-dark);transform:translateY(-2px);}
+.hero-note{font-size:12px;color:rgba(255,255,255,.4);margin-top:14px;font-weight:300;font-style:italic;}
+
+/* TWO-COL SECTIONS */
+.two-col{padding:80px 0;border-bottom:1px solid var(--light);}
+.two-col .inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1060px;margin:0 auto;padding:0 32px;}
+.two-col.reverse .inner{direction:rtl;}
+.two-col.reverse .inner>*{direction:ltr;}
+.two-col.bg-white{background:var(--warm-white);}
+.two-col.bg-off{background:var(--off-white);}
+
+.section-title{font-size:clamp(26px,3.5vw,38px);margin-bottom:22px;}
+.section-title em{font-style:italic;color:var(--red);}
+.body-p{color:var(--ink);margin-bottom:14px;font-weight:400;font-size:15px;}
+.body-p:last-child{margin-bottom:0;}
+.body-p strong{color:var(--ink);font-weight:600;}
+
+/* IMAGE PLACEHOLDERS */
+.img-ph{background:var(--lighter);border:1px solid var(--light);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--mid);font-size:18px;font-weight:400;}
+
+/* LIFE EVENTS */
+.life-list{display:flex;flex-direction:column;gap:9px;margin:20px 0;}
+.life-item{padding:11px 18px;border-left:3px solid var(--red);background:var(--lighter);border-radius:0 4px 4px 0;font-size:14px;color:var(--ink);font-weight:400;}
+
+/* PULLQUOTE */
+.pq{border-left:3px solid var(--red);padding:16px 22px;background:var(--red-light);border-radius:0 6px 6px 0;margin:24px 0;}
+.pq p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--red-dark);font-weight:600;margin:0;line-height:1.4;}
+
+/* PILLARS SECTION */
+.pillars-section{background:var(--charcoal);padding:80px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.pillars-head{text-align:center;margin-bottom:48px;}
+.pillars-head .section-title{color:#fff;}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;margin-bottom:40px;}
+.pillar{background:var(--charcoal);padding:36px 28px;}
+.pillar-num{display:none;}
+.pillar h3{font-size:18px;font-weight:600;color:#fff;letter-spacing:.02em;text-transform:none;margin-bottom:10px;}
+.pillar p{font-size:15px;color:rgba(255,255,255,.9);font-weight:400;line-height:1.6;}
+.pillars-cta{text-align:center;}
+
+/* STATS */
+.stats{background:var(--red);padding:40px 0;}
+.stats .inner{display:flex;justify-content:center;gap:0;max-width:1060px;margin:0 auto;padding:0 32px;flex-wrap:wrap;}
+.stat{text-align:center;padding:0 48px;border-right:1px solid rgba(255,255,255,.2);}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:#fff;line-height:1;}
+.stat-l{font-size:12px;color:rgba(255,255,255,.65);margin-top:4px;font-weight:300;}
+
+/* TESTIMONIALS */
+.testi-section{padding:80px 0;background:var(--off-white);border-bottom:1px solid var(--light);}
+.testi-head{text-align:center;margin-bottom:40px;}
+.testi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1060px;margin:0 auto;padding:0 32px;}
+.testi{background:var(--warm-white);border:1px solid var(--light);border-radius:6px;padding:20px;}
+.testi-stars{color:var(--red);font-size:11px;letter-spacing:2px;margin-bottom:10px;}
+.testi blockquote{font-size:13px;color:var(--mid);font-style:italic;font-weight:300;line-height:1.6;margin-bottom:12px;}
+.testi cite{font-size:12px;font-weight:500;color:var(--ink);font-style:normal;}
+
+/* OFFER SECTION */
+.offer-section{padding:80px 0;background:var(--warm-white);}
+.offer-inner{display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:start;max-width:1060px;margin:0 auto;padding:0 32px;}
+.offer-copy .section-title{margin-bottom:20px;}
+.offer-bullets{display:flex;flex-direction:column;gap:14px;margin:28px 0;}
+.offer-bullet{display:flex;gap:12px;align-items:flex-start;}
+.ob-check{width:20px;height:20px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;flex-shrink:0;margin-top:2px;}
+.ob-text{font-size:15px;color:var(--ink);font-weight:400;line-height:1.5;}
+.ob-text strong{font-weight:600;}
+.offer-note{font-size:14px;color:var(--ink);font-weight:400;margin-top:8px;line-height:1.6;}
+
+/* OFFER CARD */
+.offer-card{background:var(--charcoal);border-radius:8px;overflow:hidden;position:sticky;top:90px;}
+.offer-card-top{padding:28px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);}
+.offer-card-label{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:12px;}
+.offer-price{font-family:'Outfit',sans-serif;font-size:64px;font-weight:600;color:#fff;line-height:1;}
+.offer-price sup{font-size:28px;vertical-align:super;}
+.offer-per{font-size:14px;color:rgba(255,255,255,.85);margin-top:6px;font-weight:300;}
+.offer-card-body{padding:24px;}
+.offer-card-items{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.oci{display:flex;gap:10px;align-items:flex-start;}
+.oci-dot{width:6px;height:6px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:8px;}
+.oci-text{font-size:15px;color:rgba(255,255,255,.9);font-weight:400;line-height:1.5;}
+.offer-divider{border:none;border-top:1px solid rgba(255,255,255,.12);margin:18px 0;}
+.offer-guarantee{display:flex;gap:10px;align-items:flex-start;margin-bottom:20px;}
+.og-icon{font-size:18px;flex-shrink:0;}
+.og-text{font-size:14px;color:rgba(255,255,255,.9);font-weight:400;line-height:1.5;}
+.offer-img{width:100%;height:160px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.15);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);font-size:16px;font-weight:400;margin-bottom:20px;}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:32px 0;text-align:center;}
+footer p{font-size:13px;color:rgba(255,255,255,.75);font-weight:300;}
+footer strong{color:rgba(255,255,255,.95);font-weight:500;}
+
+@media(max-width:900px){
+  .two-col .inner{grid-template-columns:1fr;}
+  .two-col.reverse .inner{direction:ltr;}
+  .pillars-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:repeat(2,1fr);}
+  .offer-inner{grid-template-columns:1fr;}
+  .offer-card{position:static;}
+  .stats .inner{gap:24px;}
+  .stat{padding:0 24px;}
+}
+@media(max-width:600px){
+  .testi-grid{grid-template-columns:1fr;}
+  .hero-img{height:180px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <span class="logo">[Client Name]</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container-narrow">
+    <div class="hero-tag">Do you keep starting over with your fitness routine?</div>
+    <h1 class="display">Consistency Gets Easy When Someone Else Does the Planning</h1>
+    <p class="hero-sub">Certified personal trainers who schedule around you, plan everything for you, and make sure you never have to wonder what to do next</p>
+    <div class="hero-img">[Hero Image — Trainer with Client in Studio]</div>
+    <a href="#offer" class="btn">Click Here to Work with a Personal Trainer</a>
+
+  </div>
+</section>
+
+<!-- SECTION 1: WHY ROUTINE BREAKS — Image Left, Text Right -->
+<section class="two-col bg-white">
+  <div class="inner">
+    <div class="img-ph" style="height:380px;">[Image — Busy Professional]</div>
+    <div>
+      <h2 class="display section-title">Why the Routine Always Breaks Down</h2>
+      <p class="body-p">It isn't your fault that your fitness routine never seems to stick.</p>
+      <p class="body-p">Sometimes life just happens…</p>
+      <div class="life-list">
+        <div class="life-item">You got that big project that needed attention after working hours.</div>
+        <div class="life-item">One of your kids got sick, turning all your attention to them.</div>
+        <div class="life-item">A family obligation stopped you in your tracks.</div>
+      </div>
+      <p class="body-p">And just like that, the routine quietly disappears…</p>
+      <p class="body-p">So you wait for things to settle down. And when they do, you start again.</p>
+      <p class="body-p"><strong>History repeats itself. Same story, different month.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: MISSING PIECE — Text Left, Image Right -->
+<section class="two-col reverse bg-off">
+  <div class="inner">
+    <div class="img-ph" style="height:360px;">[Image — Person Watching Fitness Content]</div>
+    <div>
+      <h2 class="display section-title">Why the Advice Was Good But the Results Weren't</h2>
+      <p class="body-p">It's a good strategy to follow fitness content.</p>
+      <p class="body-p">A lot of influencers on YouTube or other platforms give high-quality advice, but they're not taking your schedule into account.</p>
+      <p class="body-p">They teach you the universal truths like how to exercise right, how to eat the right food, and how to stay consistent.</p>
+      <p class="body-p">But it's something that fits someone else's life.</p>
+      <div class="pq"><p>A plan built for someone else's life will never work in yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: PILLARS -->
+<section class="pillars-section">
+  <div class="container">
+    <div class="pillars-head">
+      <h2 class="display section-title">How [Client Name] Fills That Gap</h2>
+      <p style="color:rgba(255,255,255,.85);font-size:15px;font-weight:400;max-width:480px;margin:0 auto;">[Client Name] is built around 3 core pillars. Each one designed for a busy professional's real life.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>Resistance Training</h3>
+        <p>30-minute workout that's easy to fit into your schedule while building functional strength</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>Whole-food Eating</h3>
+        <p>Nutrition guidance that's easy to follow while supplying your body's needs</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>Accountability</h3>
+        <p>A certified personal trainer who builds your plan, tracks your progress, and makes sure showing up is the only thing you have to think about</p>
+      </div>
+    </div>
+    <div class="pillars-cta">
+      <a href="#offer" class="btn">Click Here to Work with a Fitness Trainer</a>
+    </div>
+  </div>
+</section>
+
+  </div>
+</div>
+
+
+
+<!-- SECTION 4: CREDIBILITY — Image Left, Text Right -->
+<section class="two-col bg-white">
+  <div class="inner">
+    <div class="img-ph" style="height:340px;">[Image — Studio / Team Photo]</div>
+    <div>
+      <h2 class="display section-title">Helping Ottawa Professionals Since 2006</h2>
+      <p class="body-p">We've worked with thousands of busy professionals just like you.</p>
+      <p class="body-p">Our certified trainers know how to build fitness routines around tight schedules, physical limitations, and the reality that life doesn't slow down for anyone.</p>
+      <p class="body-p"><strong>In 20 years we've learned exactly what it takes to help someone like you stay consistent, and we've built our entire approach around it.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: TESTIMONIALS -->
+<section class="testi-section">
+  <div class="container-narrow">
+    <div class="testi-head">
+      <h2 class="display section-title">Don't Take Our Word for It, Hear It From Busy Professionals Like You</h2>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"After a long-term neck injury the tailored sessions were just what I needed. Less migraines, less tension. Money well spent."</blockquote>
+      <cite>Natalie L.</cite>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"They tailor the workouts to suit every individual regardless of age and body type. I've been a member for 9 years and have no intention of quitting."</blockquote>
+      <cite>Stephen M.</cite>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"I was already seeing and feeling results after the introductory sessions. It makes it easy to stay motivated."</blockquote>
+      <cite>Kathleen L.</cite>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"Victoria helps me stay motivated and accountable. Everyone there is kind and accommodating. I would recommend for sure."</blockquote>
+      <cite>Genevieve G.</cite>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"Sarah's personalized training plans are tailored to my goals and abilities. I've made so much progress thanks to her expertise."</blockquote>
+      <cite>Bahar R.</cite>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: OFFER -->
+<section class="offer-section" id="offer">
+  <div class="offer-inner">
+    <div class="offer-copy">
+      <h2 class="display section-title">Your Body. Your Schedule. Your Trainer.</h2>
+      <p class="body-p">Work with a certified personal trainer who builds every session entirely around you.</p>
+      <div class="offer-bullets">
+        <div class="offer-bullet">
+          <div class="ob-check">✓</div>
+          <div class="ob-text"><strong>30-minute workout sessions</strong> that fit into your schedule and build functional strength</div>
+        </div>
+        <div class="offer-bullet">
+          <div class="ob-check">✓</div>
+          <div class="ob-text"><strong>Simple eating habits</strong> that give your body the fuel it needs to recover, stay energized, and show up fully every single day</div>
+        </div>
+        <div class="offer-bullet">
+          <div class="ob-check">✓</div>
+          <div class="ob-text"><strong>A dedicated trainer</strong> who makes sure you never lose momentum — someone who adjusts, plans, and keeps you consistent no matter what life throws at you</div>
+        </div>
+      </div>
+      <p class="offer-note">Work with our coaches for just 8 sessions. Long enough to feel what's possible. Short enough that the decision stays yours.</p>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-card-top">
+        <div class="offer-card-label">New Client Offer</div>
+        <div class="offer-price"><sup>$</sup>96</div>
+        <div class="offer-per">for 8 personalized sessions &nbsp;·&nbsp; $12 per session</div>
+      </div>
+      <div class="offer-card-body">
+        <div class="offer-img">[Trainer + Client Photo]</div>
+        <div class="offer-card-items">
+          <div class="oci"><div class="oci-dot"></div><div class="oci-text">8 one-on-one sessions with a certified trainer</div></div>
+          <div class="oci"><div class="oci-dot"></div><div class="oci-text">Fully customized to your schedule and goals</div></div>
+          <div class="oci"><div class="oci-dot"></div><div class="oci-text">30 minutes per session</div></div>
+          <div class="oci"><div class="oci-dot"></div><div class="oci-text">4 Ottawa locations to choose from</div></div>
+        </div>
+        <div class="offer-divider"></div>
+        <div class="offer-guarantee">
+          <div class="og-icon">🛡</div>
+          <div class="og-text">No long-term contracts. No pressure. Just 8 sessions to experience the difference for yourself.</div>
+        </div>
+        <a href="#" class="btn-lg">Click here to claim your 8 sessions</a>
+        <p style="text-align:center;font-size:12px;color:rgba(255,255,255,.7);margin-top:12px;font-style:italic;">Or call us at [Phone Number]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p style="margin-bottom:6px;"><strong>[Client Name]</strong></p>
+    <p>[Location] &nbsp;·&nbsp; [Location] &nbsp;·&nbsp; [Location] &nbsp;·&nbsp; [Location]</p>
+    <p style="margin-top:6px;">[Phone Number]</p>
+  </div>
+</footer>
+
+</body>
+</html>
